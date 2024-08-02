@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法硕主观题抽背器（民法）</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+            text-align: left;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #bdc3c7;
+            font-size: 14px;
+            color: #2c3e50;
+            background-color: #ecf0f1;
+        }
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #question-container {
+            margin-top: 20px;
+        }
+        .question {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .question strong {
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>法硕主观题抽背器（民法）</h1>
+
+        <label for="real-question">是否为真题:</label>
+        <select id="real-question">
+            <option value="仅真题">仅真题</option>
+            <option value="仅模拟题">仅模拟题</option>
+            <option value="都可以">都可以</option>
+        </select>
+
+        <label for="question-count">题目数量:</label>
+        <select id="question-count">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+
+        <button onclick="drawQuestions()">开始抽背</button>
+
+        <div id="question-container"></div>
+    </div>
+
+    <script>
+        const questionBank = [
+            {
+                real: false,
+                question: '民法和《民法典》（试论颁布民法典的重要意义）',
+            },
+            {
+                real: false,
+                question: '简述意思表示的概念和特征。',
+            },
+            {
+                real: false,
+                question: '试论民法的调整对象（简述人身关系、财产关系的特征）',
+            },
+            {
+                real: true,
+                question: '【2014】试论（简述）民法的性质',
+            },
+            {
+                real: false,
+                question: '试论（简述）社会主义核心价值观在《民法典》中的具体体现',
+            },
+            {
+                real: false,
+                question: '试论（简述）民法的渊源',
+            },
+            {
+                real: false,
+                question: '试论（简述）民法的解释的必要性和具体方法',
+            },
+{
+    real: false,
+    question: '简述民法的适用（效力）',
+},
+{
+    real: true,
+    question: '【2017】试论（简述）民法基本原则的含义和功能',
+},
+{
+    real: true,
+    question: '【2023】试论民法中的平等原则（简述平等原则的具体体现）',
+},
+{
+    real: true,
+    question: '【2014】试论民法中的自愿原则（简述自愿原则的具体体现）',
+},
+{
+    real: false,
+    question: '试论民法中的公平原则（简述公平原则的具体体现）',
+},
+{
+    real: true,
+    question: '【2011】试论民法中的诚信原则（简述诚信原则的具体体现）',
+},
+{
+    real: false,
+    question: '简述民法中的合法原则',
+},
+{
+    real: true,
+    question: '【2018 2022】试论民法中的公序良俗原则（简述公序良俗原则的具体内容）',
+},
+{
+    real: false,
+    question: '试论民法中的绿色原则（简述绿色原则的具体体现）',
+},
+{
+    real: false,
+    question: '简述民事法律关系的含义与特征',
+},
+{
+    real: false,
+    question: '民事法律关系的分类',
+},
+{
+    real: false,
+    question: '简述民事主体的具体类型',
+},
+{
+    real: false,
+    question: '简述民事法律关系客体的具体类型',
+},
+{
+    real: false,
+    question: '物的分类',
+},
+{
+    real: false,
+    question: '简述民事权利的含义和特征',
+},
+{
+    real: false,
+    question: '民事权利的分类',
+},
+{
+    real: false,
+    question: '简述民事权利的行使',
+},
+{
+    real: false,
+    question: '简述滥用民事权利的认定与后果',
+},
+{
+    real: false,
+    question: '简述民事义务的含义和特征',
+},
+{
+    real: true,
+    question: '【2013】试论民事权利的保护',
+},
+{
+    real: false,
+    question: '简述民事责任的特征',
+},
+{
+    real: true,
+    question: '【2017】简述民事责任的承担方式',
+},
+{
+    real: false,
+    question: '简述民事责任的免责事由',
+},
+{
+    real: false,
+    question: '简述民事法律事实的类型及法律效力',
+},
+{
+    real: false,
+    question: '简述民事权利能力的概念和特征',
+},
+{
+    real: false,
+    question: '自然人的民事权利能力的开始和终止',
+},
+{
+    real: false,
+    question: '简述自然人的民事行为能力的概念和特征',
+},
+{
+    real: false,
+    question: '简述自然人的民事行为能力的具体类型',
+},
+{
+    real: false,
+    question: '简述监护的含义与具体类型',
+},
+{
+    real: false,
+    question: '监护人的设定规则（简述法定监护人的确定规则）',
+},
+{
+    real: false,
+    question: '简述监护人的职责',
+},
+{
+    real: true,
+    question: '【2020】简述撤销监护权的适用情形和法律后果',
+},
+{
+    real: false,
+    question: '简述监护关系的终止',
+},
+{
+    real: false,
+    question: '简述宣告失踪制度',
+},
+{
+    real: true,
+    question: '【2016】简述宣告死亡的条件',
+},
+{
+    real: false,
+    question: '简述申请宣告死亡的利害关系人的范围',
+},
+{
+    real: false,
+    question: '简述宣告死亡的法律后果',
+},
+{
+    real: false,
+    question: '简述撤销宣告死亡的法律后果',
+},
+{
+    real: false,
+    question: '简述个体工商户的特征',
+},
+{
+    real: true,
+    question: '【2024】简述农村承包经营户的特征',
+},
+{
+    real: false,
+    question: '简述法人的概念与特征',
+},
+{
+    real: false,
+    question: '简述社团法人与财团法人的区别',
+},
+{
+    real: false,
+    question: '简述《民法典》对法人的分类',
+},
+{
+    real: false,
+    question: '简述非营利法人的具体类型',
+},
+{
+    real: false,
+    question: '简述特别法人的具体类型',
+},
+{
+    real: true,
+    question: '【2009】简述法人成立的条件',
+},
+{
+    real: false,
+    question: '法人的设立要件、目的和组织机构',
+},
+{
+    real: false,
+    question: '简述营利法人的机构及其具体职责',
+},
+{
+    real: false,
+    question: '法人的责任承担规则',
+},
+{
+    real: false,
+    question: '简述法人的变更的具体类型',
+},
+{
+    real: false,
+    question: '简述法人的终止情形（简述法人解散的事由）',
+},
+{
+    real: false,
+    question: '简述非法人组织的含义与特征',
+},
+{
+    real: false,
+    question: '简述非法人组织的具体类型',
+},
+{
+    real: false,
+    question: '合伙企业的责任承担规则',
+},
+{
+    real: false,
+    question: '简述合伙企业的设立条件',
+},
+{
+    real: true,
+    question: '【2012】简述民事法律行为的含义和特征',
+},
+{
+    real: false,
+    question: '民事法律行为的分类',
+},
+{
+    real: false,
+    question: '简述民事法律行为的成立要件',
+},
+{
+    real: false,
+    question: '简述合同的成立要件',
+},
+{
+    real: false,
+    question: '简述意思表示的含义和特征',
+},
+{
+    real: false,
+    question: '简述意思表示的形式',
+},
+{
+    real: false,
+    question: '简述意思表示的生效',
+},
+{
+    real: false,
+    question: '简述意思表示的解释',
+},
+{
+    real: false,
+    question: '合同解释的方法',
+},
+{
+    real: true,
+    question: '【2010】简述民事法律行为的有效条件',
+},
+{
+    real: false,
+    question: '简述合同的有效要件',
+},
+{
+    real: false,
+    question: '简述结婚的有效要件',
+},
+{
+    real: false,
+    question: '简述夫妻财产约定的有效要件',
+},
+{
+    real: false,
+    question: '简述登记离婚的有效要件及其程序',
+},
+{
+    real: true,
+    question: '【2013】简述遗嘱的有效要件',
+},
+{
+    real: false,
+    question: '简述可撤销的民事法律行为的特征',
+},
+{
+    real: true,
+    question: '【2019】简述可撤销的民事法律行为的适用情形和法律后果',
+},
+{
+    real: false,
+    question: '简述重大误解（错误）的具体情形和法律后果',
+},
+{
+    real: false,
+    question: '简述显失公平的特征',
+},
+{
+    real: true,
+    question: '【2018】简述效力未定的民事法律行为的含义和特征',
+},
+{
+    real: false,
+    question: '简述效力未定的民事法律行为的适用情形和法律后果',
+},
+{
+    real: false,
+    question: '简述无效的民事法律行为的含义和特征',
+},
+{
+    real: false,
+    question: '简述可撤销的民事法律行为与无效的民事法律行为的区别',
+},
+{
+    real: false,
+    question: '简述无效民事法律行为的具体情形',
+},
+{
+    real: false,
+    question: '简述无效民事法律行为的法律后果',
+},
+{
+    real: true,
+    question: '【2016】简述附条件的民事法律行为的含义和特征',
+},
+{
+    real: false,
+    question: '附期限的民事法律行为',
+},
+{
+    real: false,
+    question: '合同效力的特别规则',
+},
+{
+    real: false,
+    question: '简述代理的含义和特征',
+},
+{
+    real: false,
+    question: '简述代理的适用范围',
+},
+{
+    real: false,
+    question: '简述复代理的适用情形和法律后果',
+},
+{
+    real: false,
+    question: '简述代理权产生的具体方式',
+},
+{
+    real: true,
+    question: '【2015】简述代理权的行使原则与滥用情形',
+},
+{
+    real: false,
+    question: '简述委托代理权的终止情形',
+},
+{
+    real: false,
+    question: '简述法定代理权的终止情形',
+},
+{
+    real: true,
+    question: '【2010】试论狭义无权代理中的权利义务',
+},
+{
+    real: true,
+    question: '【2017】试论（简述）表见代理的构成要件和法律后果',
+},
+{
+    real: false,
+    question: '简述诉讼时效的适用范围',
+},
+{
+    real: false,
+    question: '简述诉讼时效的具体类型',
+},
+{
+    real: false,
+    question: '简述诉讼时效的起算规则',
+},
+{
+    real: false,
+    question: '简述诉讼时效的中止',
+},
+{
+    real: false,
+    question: '简述诉讼时效的中断',
+},
+{
+    real: false,
+    question: '简述诉讼时效与除斥期间的区别',
+},
+{
+    real: false,
+    question: '简述人格权的含义和特征',
+},
+{
+    real: false,
+    question: '简述生命权的含义与特征',
+},
+{
+    real: false,
+    question: '简述健康权的含义与特征',
+},
+{
+    real: false,
+    question: '简述身体权的含义与特征',
+},
+{
+    real: false,
+    question: '简述姓名权的含义与特征',
+},
+{
+    real: false,
+    question: '简述名称权的含义与特征',
+},
+{
+    real: false,
+    question: '简述肖像权的含义与特征',
+},
+{
+    real: false,
+    question: '简述名誉权的含义与特征',
+},
+{
+    real: false,
+    question: '简述荣誉权的含义与特征',
+},
+{
+    real: false,
+    question: '简述名誉和荣誉的区别',
+},
+{
+    real: false,
+    question: '简述隐私权的含义与特征',
+},
+{
+    real: false,
+    question: '简述一般人格权的特征和功能',
+},
+{
+    real: false,
+    question: '简述生命权的主要内容',
+},
+{
+    real: false,
+    question: '简述健康权的主要内容',
+},
+{
+    real: false,
+    question: '简述身体权的主要内容',
+},
+{
+    real: false,
+    question: '简述姓名权的主要内容',
+},
+{
+    real: false,
+    question: '简述名称权的主要内容',
+},
+{
+    real: false,
+    question: '简述肖像权的内容',
+},
+{
+    real: false,
+    question: '简述名誉权的内容',
+},
+{
+    real: false,
+    question: '简述荣誉权的内容',
+},
+{
+    real: false,
+    question: '简述隐私权的内容',
+},
+{
+    real: false,
+    question: '人体组织器官的捐献规则',
+},
+{
+    real: false,
+    question: '自然人姓氏选取的规则',
+},
+{
+    real: false,
+    question: '姓名、 肖像等人格标识的许可使用规则',
+},
+{
+    real: false,
+    question: '试论（简述）人格权的保护',
+},
+{
+    real: false,
+    question: '物质性人格权保护的基本规则',
+},
+{
+    real: false,
+    question: '物质性人格权的特别保护规定',
+},
+{
+    real: false,
+    question: '精神性人格权保护的基本规则',
+},
+{
+    real: true,
+    question: '【2022】合理使用他人肖像的具体情形',
+},
+{
+    real: false,
+    question: '名誉权保护的特别规定（简述名誉侵权中认定行为人合理核实义务的考量因素）',
+},
+{
+    real: false,
+    question: '简述侵犯隐私权的具体情形',
+},
+{
+    real: false,
+    question: '简述个人信息的处理规则',
+},
+{
+    real: false,
+    question: '简述处理个人信息的免责情形',
+},
+{
+    real: false,
+    question: '敏感个人信息的处理',
+},
+{
+    real: false,
+    question: '简述物权的含义和特征（简述物权和债权的区别）',
+},
+{
+    real: true,
+    question: '【2016】简述物权的效力',
+},
+{
+    real: false,
+    question: '物权的类型',
+},
+{
+    real: false,
+    question: '简述物权的平等保护原则',
+},
+{
+    real: false,
+    question: '简述物权客体特定原则',
+},
+{
+    real: false,
+    question: '试论（简述）物权法定原则',
+},
+{
+    real: true,
+    question: '【2016】试论（简述）物权的公示、公信原则',
+},
+{
+    real: false,
+    question: '物权变动的类型',
+},
+{
+    real: false,
+    question: '试论（简述）物权变动的立法模式',
+},
+{
+    real: false,
+    question: '基于民事法律行为的物权变动',
+},
+{
+    real: false,
+    question: '试论（简述）不动产登记的具体类型',
+},
+{
+    real: false,
+    question: '简述不动产登记的效力',
+},
+{
+    real: false,
+    question: '简述动产交付的具体类型',
+},
+{
+    real: false,
+    question: '简述非基于民事法律行为的物权变动',
+},
+{
+    real: true,
+    question: '【2015】试论（简述）物权的保护',
+},
+{
+    real: false,
+    question: '简述所有权的含义和特征',
+},
+{
+    real: false,
+    question: '简述所有权的权能',
+},
+{
+    real: false,
+    question: '所有权的分类',
+},
+{
+    real: false,
+    question: '简述所有权原始取得的具体情形（简述先占的构成要件）',
+},
+{
+    real: false,
+    question: '拾得遗失物制度',
+},
+{
+    real: false,
+    question: '简述添附的具体类型',
+},
+{
+    real: false,
+    question: '添附物的物权归属规则',
+},
+{
+    real: true,
+    question: '【2007】简述动产善意取得的适用条件',
+},
+{
+    real: false,
+    question: '简述不动产善意取得的适用条件',
+},
+{
+    real: false,
+    question: '简述善意取得的法律后果',
+},
+{
+    real: false,
+    question: '简述所有权的消灭情形',
+},
+{
+    real: false,
+    question: '简述所有权的限制',
+},
+{
+    real: false,
+    question: '简述征收和征用的区别',
+},
+{
+    real: false,
+    question: '简述相邻关系的含义和特征',
+},
+{
+    real: false,
+    question: '简述相邻关系的具体类型',
+},
+{
+    real: true,
+    question: '【2006】简述建筑物区分所有权的特征',
+},
+{
+    real: false,
+    question: '简述建筑物区分所有权的内容',
+},
+{
+    real: false,
+    question: '建筑物区分所有权的具体规则',
+},
+{
+    real: false,
+    question: '简述共有的含义和特征',
+},
+{
+    real: false,
+    question: '简述按份共有的含义和特征',
+},
+{
+    real: false,
+    question: '简述共同共有的含义和特征',
+},
+{
+    real: false,
+    question: '简述按份共有的内容',
+},
+{
+    real: false,
+    question: '简述共同共有的内容',
+},
+{
+    real: false,
+    question: '简述用益物权的概念和特征',
+},
+{
+    real: false,
+    question: '简述用益物权的具体类型',
+},
+{
+    real: false,
+    question: '简述土地承包经营权的特征',
+},
+{
+    real: false,
+    question: '简述宅基地使用权的特征',
+},
+{
+    real: false,
+    question: '简述建设用地使用权的特征',
+},
+{
+    real: false,
+    question: '简述居住权的特征',
+},
+{
+    real: true,
+    question: '【2019】简述地役权的特征',
+},
+{
+    real: true,
+    question: '【2011】简述相邻关系和地役权的区别',
+},
+{
+    real: false,
+    question: '用益物权的变动规则',
+},
+{
+    real: false,
+    question: '简述建设用地使用权的取得方式',
+},
+{
+    real: false,
+    question: '简述土地承包经营权的内容',
+},
+{
+    real: false,
+    question: '简述建设用地使用权的内容',
+},
+{
+    real: true,
+    question: '【2021】简述宅基地使用权的内容',
+},
+{
+    real: false,
+    question: '简述地役权的内容',
+},
+{
+    real: false,
+    question: '简述居住权的内容',
+},
+{
+    real: false,
+    question: '简述担保物权的具体类型',
+},
+{
+    real: false,
+    question: '简述担保物权的特征',
+},
+{
+    real: true,
+    question: '【2005】简述抵押权的特征',
+},
+{
+    real: false,
+    question: '简述质权的特征',
+},
+{
+    real: false,
+    question: '简述留置权的特征',
+},
+{
+    real: false,
+    question: '简述动产浮动抵押的含义和特征',
+},
+{
+    real: false,
+    question: '简述动产浮动抵押中抵押财产的确定情形',
+},
+{
+    real: false,
+    question: '简述最高额抵押的含义与特征',
+},
+{
+    real: false,
+    question: '简述最高额抵押权人的债权确定情形',
+},
+{
+    real: false,
+    question: '简述可以设立抵押权的抵押财产范围',
+},
+{
+    real: false,
+    question: '简述不得设立抵押权的抵押财产',
+},
+{
+    real: false,
+    question: '简述抵押权人的权利',
+},
+{
+    real: false,
+    question: '简述抵押权的优先顺位',
+},
+{
+    real: false,
+    question: '简述抵押权的实现',
+},
+{
+    real: false,
+    question: '简述可以出质的财产范围',
+},
+{
+    real: false,
+    question: '质权的设立规则',
+},
+{
+    real: false,
+    question: '简述质权人的权利',
+},
+{
+    real: false,
+    question: '简述质权人的义务',
+},
+{
+    real: false,
+    question: '简述留置权的成立要件',
+},
+{
+    real: false,
+    question: '简述留置权的消灭情形',
+},
+{
+    real: false,
+    question: '简述留置权人的权利',
+},
+{
+    real: false,
+    question: '简述留置权人的义务',
+},
+{
+    real: false,
+    question: '留置权的实现',
+},
+{
+    real: false,
+    question: '混合担保的实现规则',
+},
+{
+    real: false,
+    question: '同一动产上不同担保物权的优先顺位',
+},
+{
+    real: false,
+    question: '简述占有的含义和特征',
+},
+{
+    real: false,
+    question: '占有的分类',
+},
+{
+    real: false,
+    question: '简述占有的效力',
+},
+{
+    real: false,
+    question: '简述善意占有和恶意占有的区别',
+},
+{
+    real: false,
+    question: '简述占有的保护',
+},
+{
+    real: false,
+    question: '简述知识产权的含义和客体范围',
+},
+{
+    real: true,
+    question: '【2013】简述知识产权的法律特征',
+},
+{
+    real: false,
+    question: '简述著作权的含义和特征',
+},
+{
+    real: false,
+    question: '简述专利权的含义和特征',
+},
+{
+    real: false,
+    question: '简述商标权的含义与特征',
+},
+{
+    real: true,
+    question: '【2016】简述商业秘密的特征（构成要件）',
+},
+{
+    real: false,
+    question: '简述侵犯商业秘密的具体情形',
+},
+{
+    real: false,
+    question: '著作权的主体',
+},
+{
+    real: false,
+    question: '简述著作权的客体范围',
+},
+{
+    real: false,
+    question: '简述著作人身权的内容',
+},
+{
+    real: false,
+    question: '著作财产权的内容',
+},
+{
+    real: true,
+    question: '【2016】简述专利权客体的具体类型',
+},
+{
+    real: false,
+    question: '简述发明、实用新型和外观设计的区别',
+},
+{
+    real: false,
+    question: '简述不授予专利权的具体情形',
+},
+{
+    real: true,
+    question: '【2015】专利权的主体:简述职务发明创造的具体类型',
+},
+{
+    real: false,
+    question: '简述专利权的内容',
+},
+{
+    real: false,
+    question: '简述注册商标的具体类型',
+},
+{
+    real: false,
+    question: '不得使用和不得注册的标志',
+},
+{
+    real: true,
+    question: '【2017】简述商标权的内容',
+},
+{
+    real: false,
+    question: '简述债的含义和特征',
+},
+{
+    real: false,
+    question: '简述债的要素',
+},
+{
+    real: false,
+    question: '简述债权的含义与特征',
+},
+{
+    real: false,
+    question: '简述债权的权能',
+},
+{
+    real: false,
+    question: '简述债务的含义和特征',
+},
+{
+    real: false,
+    question: '简述债务的具体类型',
+},
+{
+    real: false,
+    question: '简述合同的概念和特征',
+},
+{
+    real: false,
+    question: '合同的分类（简述为第三人利益订立的合同的特征）',
+},
+{
+    real: false,
+    question: '债与合同的关系：合同编的调整范围',
+},
+{
+    real: false,
+    question: '简述债的发生原因',
+},
+{
+    real: false,
+    question: '简述无因管理的构成要件',
+},
+{
+    real: false,
+    question: '简述无因管理之债的效力',
+},
+{
+    real: false,
+    question: '简述不当得利的构成要件',
+},
+{
+    real: false,
+    question: '简述不当得利的具体类型',
+},
+{
+    real: false,
+    question: '简述不当得利之债的效力',
+},
+{
+    real: false,
+    question: '合同订立的方式',
+},
+{
+    real: false,
+    question: '简述要约的构成要件和法律效力',
+},
+{
+    real: false,
+    question: '简述要约和要约邀请的区别',
+},
+{
+    real: false,
+    question: '简述承诺的构成要件与效力',
+},
+{
+    real: false,
+    question: '简述合同的形式',
+},
+{
+    real: false,
+    question: '合同成立的时间',
+},
+{
+    real: false,
+    question: '合同成立的地点',
+},
+{
+    real: false,
+    question: '试论格式条款的规范（简述格式条款的无效情形）',
+},
+{
+    real: false,
+    question: '简述强制缔约的具体类型',
+},
+{
+    real: false,
+    question: '简述合同履行的一般规则',
+},
+{
+    real: false,
+    question: '合同履行具体规则的确定（简述合同漏洞的填补规则）',
+},
+{
+    real: false,
+    question: '选择之债的履行规则（简述选择之债中选择权人的确定顺序）',
+},
+{
+    real: false,
+    question: '按份之债的履行规则',
+},
+{
+    real: false,
+    question: '连带之债的履行规则',
+},
+{
+    real: false,
+    question: '涉他合同的履行规则',
+},
+{
+    real: true,
+    question: '【2011】简述情势变更的适用条件和法律后果',
+},
+{
+    real: false,
+    question: '简述同时履行抗辩权的构成要件和效力',
+},
+{
+    real: false,
+    question: '简述先履行抗辩权的构成要件和效力',
+},
+{
+    real: false,
+    question: '简述不安抗辩权的构成要件',
+},
+{
+    real: false,
+    question: '简述不安抗辩权的法律效力',
+},
+{
+    real: false,
+    question: '简述债权人的代位权的成立条件',
+},
+{
+    real: false,
+    question: '债权人的代位权的法律效力',
+},
+{
+    real: false,
+    question: '简述债权人的撤销权的成立条件',
+},
+{
+    real: false,
+    question: '债权人的撤销权的法律效力',
+},
+{
+    real: true,
+    question: '【2009】简述保证合同的含义和特征',
+},
+{
+    real: false,
+    question: '简述保证方式的类型',
+},
+{
+    real: false,
+    question: '保证期间的含义与效力',
+},
+{
+    real: false,
+    question: '保证的效力（简述主债权债务合同的变更对保证责任的影响）',
+},
+{
+    real: false,
+    question: '简述定金的含义与特征',
+},
+{
+    real: false,
+    question: '简述定金的类型',
+},
+{
+    real: false,
+    question: '简述定金的效力',
+},
+{
+    real: false,
+    question: '简述定金和预付款的区别',
+},
+{
+    real: false,
+    question: '定金罚则的承担规则',
+},
+{
+    real: false,
+    question: '简述合同的变更',
+},
+{
+    real: true,
+    question: '【2020】简述债权让与的要件',
+},
+{
+    real: false,
+    question: '简述债权让与的效力',
+},
+{
+    real: false,
+    question: '简述免责债务承担的要件',
+},
+{
+    real: false,
+    question: '简述免责债务承担的效力',
+},
+{
+    real: false,
+    question: '并存债务承担的要件及效力',
+},
+{
+    real: false,
+    question: '简述债权债务的概括承受的具体类型及其区别',
+},
+{
+    real: false,
+    question: '简述合同权利义务的终止原因',
+},
+{
+    real: false,
+    question: '简述代物清偿的构成要件和法律后果',
+},
+{
+    real: false,
+    question: '简述清偿抵充的适用规则',
+},
+{
+    real: false,
+    question: '简述法定抵销的构成要件',
+},
+{
+    real: false,
+    question: '简述提存的适用条件',
+},
+{
+    real: false,
+    question: '简述提存的效力',
+},
+{
+    real: false,
+    question: '免除的构成及其效力',
+},
+{
+    real: false,
+    question: '简述混同的成立原因和法律效力',
+},
+{
+    real: false,
+    question: '简述合同解除的含义和特征',
+},
+{
+    real: false,
+    question: '简述合同解除的条件',
+},
+{
+    real: false,
+    question: '简述合同法定解除的适用情形',
+},
+{
+    real: false,
+    question: '合同解除权的行使规则',
+},
+{
+    real: false,
+    question: '简述合同解除的效力',
+},
+{
+    real: true,
+    question: '【2010】试论（简述）缔约过失责任的构成要件和法律后果',
+},
+{
+    real: false,
+    question: '简述缔约过失责任的适用情形',
+},
+{
+    real: false,
+    question: '简述违约责任的含义和特征',
+},
+{
+real: false,
+question: '简述违约责任归责原则与构成要件',
+},
+{
+real: false,
+question: '简述违约责任的免责事由',
+},
+{
+real: false,
+question: '试论（简述）违约责任的承担方式',
+},
+{
+real: false,
+question: '违约责任与侵权责任的竞合',
+},
+{
+real: false,
+question: '买卖合同的概念和特征',
+},
+{
+real: false,
+question: '简述供用电、 水、 气、 热力合同的概念和特征',
+},
+{
+real: true,
+question: '【2019】简述赠与合同的含义与特征',
+},
+{
+real: false,
+question: '简述租赁合同的含义与特征',
+},
+{
+real: false,
+question: '简述融资租赁合同的概念和特征',
+},
+{
+real: false,
+question: '简述买卖合同的效力',
+},
+{
+real: false,
+question: '简述赠与合同的效力',
+},
+{
+real: false,
+question: '简述租赁合同的效力',
+},
+{
+real: false,
+question: '简述融资租赁合同的效力',
+},
+{
+real: false,
+question: '简述买卖合同中的标的物的风险分担和利益承受',
+},
+{
+real: false,
+question: '买卖合同解除的特别情形',
+},
+{
+real: false,
+question: '所有权保留买卖（简述买卖合同中出卖人取回标的物适用情形）',
+},
+{
+real: false,
+question: '特殊买卖合同的效力',
+},
+{
+real: false,
+question: '简述赠与合同的特别终止情形',
+},
+{
+real: false,
+question: '多重买卖和一房数租的规范',
+},
+{
+real: false,
+question: '租赁权的物权化: 买卖不破租赁',
+},
+{
+real: false,
+question: '房屋租赁合同的特别效力（简述房屋承租人无权行使优先购买权的情形）',
+},
+{
+real: false,
+question: '融资租赁合同中租赁物的归属',
+},
+{
+real: false,
+question: '简述借款合同的含义与特征',
+},
+{
+real: false,
+question: '简述保理合同的概念与特征',
+},
+{
+real: false,
+question: '简述合伙合同的概念和特征',
+},
+{
+real: false,
+question: '简述借款合同的效力',
+},
+{
+real: false,
+question: '简述保理合同的类型',
+},
+{
+real: false,
+question: '简述保理人债权实现的顺序',
+},
+{
+real: false,
+question: '简述合伙合同的效力',
+},
+{
+real: false,
+question: '简述承揽合同的概念和特征',
+},
+{
+real: false,
+question: '简述建设工程合同的概念和特征',
+},
+{
+real: false,
+question: '简述承揽合同的效力',
+},
+{
+real: false,
+question: '简述建设工程勘察、设计合同的效力',
+},
+{
+real: false,
+question: '简述建设工程施工合同的效力',
+},
+{
+real: false,
+question: '简述建设工程合同的无效情形和法律后果',
+},
+{
+real: false,
+question: '建设工程承包人的优先受偿权',
+},
+{
+real: false,
+question: '简述运输合同的概念和特征',
+},
+{
+real: false,
+question: '简述保管合同的概念和特征',
+},
+{
+real: false,
+question: '简述仓储合同的概念和特征',
+},
+{
+real: false,
+question: '简述客运合同的效力',
+},
+{
+real: false,
+question: '简述货运合同的效力',
+},
+{
+real: false,
+question: '简述保管合同的效力',
+},
+{
+real: false,
+question: '简述仓储合同的效力',
+},
+{
+real: false,
+question: '简述委托合同的概念和特征',
+},
+{
+real: false,
+question: '简述物业服务合同的概念和特征',
+},
+{
+real: false,
+question: '简述行纪合同的概念和特征',
+},
+{
+real: false,
+question: '简述中介合同的概念和特征',
+},
+{
+real: false,
+question: '简述委托合同的效力',
+},
+{
+real: false,
+question: '物业服务合同的效力',
+},
+{
+real: false,
+question: '简述行纪合同的效力',
+},
+{
+real: false,
+question: '中介合同的效力',
+},
+{
+real: false,
+question: '简述间接代理中委托人的介入权、第三人的选择权的行使条件',
+},
+{
+real: false,
+question: '简述技术合同的具体类型',
+},
+{
+real: false,
+question: '简述亲属的含义和特征',
+},
+{
+real: false,
+question: '简述亲属的具体类型',
+},
+{
+real: false,
+question: '亲系与亲等',
+},
+{
+real: false,
+question: '简述可撤销婚姻的适用情形',
+},
+{
+real: false,
+question: '简述婚姻无效的具体情形',
+},
+{
+real: false,
+question: '简述婚姻无效的确认程序',
+},
+{
+real: true,
+question: '【2023】简述婚姻无效或被撤销的法律后果',
+},
+{
+real: false,
+question: '简述离婚的特征',
+},
+{
+real: false,
+question: '简述诉讼离婚的适用情形',
+},
+{
+real: false,
+question: '简述离婚在人身关系上的法律后果',
+},
+{
+real: false,
+question: '简述离婚在财产关系上的法律后果',
+},
+{
+real: false,
+question: '简述离婚经济补偿的成立条件',
+},
+{
+real: false,
+question: '简述离婚经济帮助的成立条件',
+},
+{
+real: false,
+question: '简述离婚损害赔偿的成立条件（适用情形）',
+},
+{
+real: false,
+question: '简述夫妻人身关系的含义和特征',
+},
+{
+real: false,
+question: '简述夫妻人身关系的内容',
+},
+{
+real: false,
+question: '简述夫妻财产关系的内容',
+},
+{
+real: false,
+question: '简述夫妻共同财产的具体情形',
+},
+{
+real: false,
+question: '简述夫妻个人财产的具体情形',
+},
+{
+real: false,
+question: '试论夫妻债务的认定与清偿',
+},
+{
+real: false,
+question: '简述父母子女关系的内容',
+},
+{
+real: false,
+question: '祖孙或兄弟姐妹之间的扶养关系',
+},
+{
+real: false,
+question: '简述收养的概念和特征',
+},
+{
+real: false,
+question: '简述收养关系的成立条件',
+},
+{
+real: false,
+question: '简述收养人应当具备的条件',
+},
+{
+real: false,
+question: '收养的效力',
+},
+{
+    real: false,
+    question: '简述解除收养关系的法定情形和解除程序',
+},
+{
+    real: false,
+    question: '简述收养关系的解除的法律后果',
+},
+{
+    real: false,
+    question: '简述继承的含义和特征',
+},
+{
+    real: false,
+    question: '简述继承权的含义与特征',
+},
+{
+    real: false,
+    question: '简述继承权的放弃',
+},
+{
+    real: false,
+    question: '简述继承权丧失的适用情形',
+},
+{
+    real: false,
+    question: '简述遗产的概念和特征',
+},
+{
+    real: false,
+    question: '简述法定继承的特征',
+},
+{
+    real: false,
+    question: '简述法定继承的适用情形',
+},
+{
+    real: false,
+    question: '法定继承人的范围和继承顺序',
+},
+{
+real: true,
+    question: '【2006】简述代位继承的适用条件',
+},
+{
+real: true,
+    question: '【2024】简述转继承的含义和条件',
+},
+{
+    real: false,
+    question: '法定继承的遗产分配规则（简述不均等分配遗产的适用情形）',
+},
+{
+    real: false,
+    question: '简述遗嘱的概念和特征',
+},
+{
+    real: false,
+    question: '简述遗嘱的形式',
+},
+{
+    real: false,
+    question: '简述遗嘱变更和撤回的方式',
+},
+{
+    real: false,
+    question: '简述遗嘱的无效情形',
+},
+{
+    real: false,
+    question: '简述遗嘱继承的含义和特征',
+},
+{
+    real: false,
+    question: '简述遗嘱继承的适用条件',
+},
+{
+    real: false,
+    question: '简述遗赠的概念和特征',
+},
+{
+    real: false,
+    question: '简述遗嘱继承与遗赠的区别',
+},
+{
+    real: false,
+    question: '简述遗产管理人的确定和职责',
+},
+{
+    real: false,
+    question: '简述遗赠扶养协议的特征',
+},
+{
+real: true,
+    question: '【2013】简述遗赠和遗赠扶养协议的区别',
+},
+{
+    real: false,
+    question: '遗产的分割',
+},
+{
+    real: false,
+    question: '简述遗产债务清偿的原则',
+},
+{
+    real: false,
+    question: '简述侵权责任的概念和特征',
+},
+{
+    real: false,
+    question: '试论侵权责任的归责原则',
+},
+{
+    real: false,
+    question: '简述过错责任原则',
+},
+{
+    real: false,
+    question: '简述一般侵权行为的构成要件',
+},
+{
+    real: false,
+    question: '简述《民法典·侵权责任编》适用过错推定的具体情形',
+},
+{
+    real: false,
+    question: '简述无过错责任原则的特征及适用方法',
+},
+{
+real: true,
+    question: '【2011】简述无过错责任原则的适用情形',
+},
+{
+    real: false,
+    question: '加害行为的具体类型',
+},
+{
+    real: false,
+    question: '简述损害事实的含义和具体类型',
+},
+{
+    real: false,
+    question: '试论因果关系的认定规则',
+},
+{
+    real: false,
+    question: '作为侵权责任构成要件的过错',
+},
+{
+real: true,
+    question: '【2017】简述侵权责任的抗辩事由',
+},
+{
+real: true,
+    question: '【2014】简述共同侵权行为的概念和构成要件',
+},
+{
+real: true,
+    question: '【2013】简述共同危险行为的构成要件',
+},
+{
+    real: false,
+    question: '简述无意思联络的数人侵权的构成要件及其责任',
+},
+{
+    real: false,
+    question: '财产损害赔偿的适用',
+},
+{
+    real: false,
+    question: '人身损害赔偿的适用',
+},
+{
+    real: false,
+    question: '简述精神损害赔偿的适用情形',
+},
+{
+real: true,
+    question: '【2023】简述惩罚性赔偿的适用情形',
+},
+{
+    real: false,
+    question: '简述法定分担损失的适用条件',
+},
+{
+    real: false,
+    question: '简述监护人责任的含义和特征',
+},
+{
+    real: false,
+    question: '简述用人单位责任的含义和特征',
+},
+{
+    real: false,
+    question: '用人者责任的承担规则',
+},
+{
+    real: false,
+    question: '简述网络侵权责任的承担规则',
+},
+{
+    real: false,
+    question: '简述违反安全保障义务的侵权责任的具体类型',
+},
+{
+    real: false,
+    question: '简述教育机构的侵权责任的具体类型',
+},
+{
+    real: false,
+    question: '简述产品责任的归责原则及责任主体',
+},
+{
+real: true,
+    question: '【2015】简述产品责任的构成要件',
+},
+{
+real: true,
+    question: '【2015】简述产品责任的责任方式',
+},
+{
+    real: false,
+    question: '简述机动车交通事故责任的归责原则',
+},
+{
+    real: false,
+    question: '机动车交通事故责任主体的具体规定',
+},
+{
+    real: false,
+    question: '简述医疗损害责任的构成要件',
+},
+{
+    real: false,
+    question: '医疗损害责任的特别规定（简述医疗机构不承担责任的适用情形）',
+},
+{
+    real: false,
+    question: '简述环境污染和生态破坏责任的构成要件',
+},
+{
+    real: false,
+    question: '简述环境污染和生态破坏责任的责任方式',
+},
+{
+    real: false,
+    question: '简述饲养动物损害责任的构成要件',
+},
+{
+    real: false,
+    question: '简述饲养动物损害责任的具体类型',
+},
+{
+    real: false,
+    question: '简述高度危险责任的特征及构成要件',
+},
+{
+    real: false,
+    question: '高度危险责任的具体类型和承担规则',
+},
+{
+    real: false,
+    question: '建筑物等倒塌的致害责任',
+},
+{
+    real: false,
+    question: '简述物件损害责任的具体类型',
+},
+{
+    real: false,
+    question: '简述高空抛物致人损害的责任承担',
+}
+
+
+        ];
+
+        function drawQuestions() {
+            const realQuestion = document.getElementById('real-question').value;
+            const questionCount = parseInt(document.getElementById('question-count').value);
+
+            let filteredQuestions = questionBank.filter(q => 
+                (realQuestion === '都可以' || (realQuestion === '仅真题' && q.real) || (realQuestion === '仅模拟题' && !q.real))
+            );
+
+            filteredQuestions = filteredQuestions.sort(() => 0.5 - Math.random()).slice(0, questionCount);
+
+            const questionContainer = document.getElementById('question-container');
+            questionContainer.innerHTML = '';
+
+            filteredQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<strong>题目 ${index + 1}:</strong> ${q.question}`;
+                questionContainer.appendChild(questionDiv);
+            });
+        }
+    </script>
+</body>
+</html>
